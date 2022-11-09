@@ -12,4 +12,4 @@ phases:
       - docker image ls
       - docker tag jenkins_tutorial:latest 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr/jenkins_tutorial:latest
       - docker image ls
-      - docker push 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr/jenkins_tutorial:latest
+      - docker push 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
