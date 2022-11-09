@@ -2,18 +2,18 @@ pipeline {
   agent none
 
   stages {
-    stage('Notify starting job') {
-      agent {
-        label 'master'
-      }
-      // steps {
-      //   slackSend(
-      //     channel: "#it_notifications", 
-      //     color: "#EEEEEE", 
-      //     message: "[Starting] ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.RUN_DISPLAY_URL}|Open>)"
-      //   )
-      // }
-    }
+    // stage('Notify starting job') {
+    //   agent {
+    //     label 'master'
+    //   }
+    //   // steps {
+    //   //   slackSend(
+    //   //     channel: "#it_notifications", 
+    //   //     color: "#EEEEEE", 
+    //   //     message: "[Starting] ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.RUN_DISPLAY_URL}|Open>)"
+    //   //   )
+    //   // }
+    // }
     stage('Build Docker Image') {
       agent {
         label 'master'
