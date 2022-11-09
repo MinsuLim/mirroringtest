@@ -19,7 +19,7 @@ pipeline {
         label 'master'
       }
       steps {
-        echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"
+        echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
 
         awsCodeBuild(
           credentialsType: 'keys',
