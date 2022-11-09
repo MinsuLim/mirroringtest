@@ -1,0 +1,13 @@
+version: 0.2
+env:
+  variables:
+    AWS_DEFAULT_REGION: "ap-northeast-2"
+    ECR_URL: "056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr"
+
+phases:
+  build:
+    commands:
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $ECR_URL
+      - docker build -t jenkins_tutorial .
+      - docker tag jenkins_tutorial:latest $ECR_URL/jenkins_tutorial:latest
+      - docker push $ECR_URL/jenkins_tutorial:latest
