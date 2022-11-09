@@ -19,7 +19,7 @@ pipeline {
           buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
         )
       }
-    }
+    } 
     
     // stage('Build Docker Image - EC2') {
     //   agent {
