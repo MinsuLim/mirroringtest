@@ -4,7 +4,7 @@ pipeline {
   stages {
 
       stage(' Build Docker Image - CodeBuild') {
-        agent { node { label 'master' } }
+        agent { node { label 'ecs-agent' } }
 
         steps {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
