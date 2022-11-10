@@ -2,7 +2,6 @@ pipeline {
   agent none
 
   stages {
-    parallel {
 
       stage(' Build Docker Image - CodeBuild') {
         agent {
@@ -37,7 +36,6 @@ pipeline {
           '''
          }
       }
-    }
 
   }
 }
