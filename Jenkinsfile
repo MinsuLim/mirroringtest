@@ -23,7 +23,7 @@ pipeline {
       
       stage('Build Docker Image - EC2') {
         agent {
-          label 'ecs-agent'
+          label 'ecs-cloud'
         }
         steps {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
