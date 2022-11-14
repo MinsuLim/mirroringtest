@@ -3,34 +3,36 @@ pipeline {
 
   stages {
 
-      stage(' Build Docker Image - CodeBuild') {
-        agent { node { label 'ecs-agent' } }
+      // stage(' Build Docker Image - CodeBuild') {
+      //   agent { node { label 'ecs-agent' } }
 
-        steps {
-          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
+      //   steps {
+      //     echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
 
-          awsCodeBuild(
-            credentialsType: 'keys',
-            projectName: 'tutorial',
-            region: 'ap-northeast-2',
-            sourceControlType: 'jenkins',
-            sseAlgorithm: 'AES256',
-            buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
-          )
-        }
-      } 
+      //     awsCodeBuild(
+      //       credentialsType: 'keys',
+      //       projectName: 'tutorial',
+      //       region: 'ap-northeast-2',
+      //       sourceControlType: 'jenkins',
+      //       sseAlgorithm: 'AES256',
+      //       buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
+      //     )
+      //   }
+      // } 
       
       stage('Build Docker Image - EC2') {
         agent { node { label 'ecs-agent' } }
         steps {
+          echo "Hello Agent!!!!"
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
-          echo '''
-            aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr
-            docker build -t jenkins_tutorial .
-            docker tag jenkins_tutorial:latest 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
-            docker push 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
+          
+          // echo '''
+          //   aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr
+          //   docker build -t jenkins_tutorial .
+          //   docker tag jenkins_tutorial:latest 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
+          //   docker push 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
 
-          '''
+          // '''
          }
       }
 
