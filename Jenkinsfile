@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { node { label 'ecs-agent' } }
 
   stages {
 
@@ -21,7 +21,6 @@ pipeline {
       // } 
       
       stage('Build Docker Image - EC2') {
-        agent { node { label 'ecs-agent' } }
         steps {
           echo "Hello Agent!!!!"
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
