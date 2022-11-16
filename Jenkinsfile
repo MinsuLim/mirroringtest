@@ -1,5 +1,5 @@
 pipeline {
-  agent { node { label 'ecs-agent' } }
+  agent any
 
   stages {
 
