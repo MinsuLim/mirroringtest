@@ -3,22 +3,20 @@ pipeline {
 
   stages {
 
-      // stage(' Build Docker Image - CodeBuild') {
-      //   agent { node { label 'ecs-agent' } }
+      stage(' Build Docker Image - CodeBuild') {
+        steps {
+          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
 
-      //   steps {
-      //     echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
-
-      //     awsCodeBuild(
-      //       credentialsType: 'keys',
-      //       projectName: 'tutorial',
-      //       region: 'ap-northeast-2',
-      //       sourceControlType: 'jenkins',
-      //       sseAlgorithm: 'AES256',
-      //       buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
-      //     )
-      //   }
-      // } 
+          awsCodeBuild(
+            credentialsType: 'keys',
+            projectName: 'tutorial',
+            region: 'ap-northeast-2',
+            sourceControlType: 'jenkins',
+            sseAlgorithm: 'AES256',
+            buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
+          )
+        }
+      } 
       
       stage('Build Docker Image - EC2') {
         steps {
