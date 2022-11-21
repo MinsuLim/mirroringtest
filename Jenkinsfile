@@ -25,7 +25,7 @@ pipeline {
           
           writeFile file: 'buildspec.yml', text: nonProductionBuildSpec
           //Send checked out files to AWS
-          awsCodeBuild projectName: "tutorial",region: "ap-northeast-2", sourceControlType: "jenkins"
+          awsCodeBuild credentialsType: 'keys', sseAlgorithm: 'AES256', projectName: "tutorial",region: "ap-northeast-2", sourceControlType: "jenkins"
 
           // awsCodeBuild(
           //   credentialsType: 'keys',
