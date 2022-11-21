@@ -6,7 +6,7 @@ pipeline {
       stage(' Build Docker Image - CodeBuild') {
         steps {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
-          echo 'java -version'
+          sh('java -version')
           // String nonProductionBuildSpec = """
           //   version: 0.2
           //   env:
