@@ -6,7 +6,6 @@ pipeline {
       steps {
         script {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
-          sh('java -version')
           String nonProductionBuildSpec = """
             version: 0.2
             env:
@@ -21,7 +20,7 @@ pipeline {
                   - docker tag jenkins_tutorial:latest 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
                   - docker image ls
                   - docker push 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
-          """.replace("\t","    ")
+          """.stripIndent()
           
           writeFile file: 'buildspec.yml', text: nonProductionBuildSpec
           //Send checked out files to AWS
