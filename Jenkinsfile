@@ -6,6 +6,7 @@ pipeline {
       stage(' Build Docker Image - CodeBuild') {
         steps {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
+          echo 'java -version'
           String nonProductionBuildSpec = """
             version: 0.2
             env:
@@ -21,6 +22,7 @@ pipeline {
                   - docker image ls
                   - docker push 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins_codebuild_ecr:latest
           """.replace("\t","    ")
+          
           writeFile file: 'buildspec.yml', text: nonProductionBuildSpec
           //Send checked out files to AWS
           awsCodeBuild projectName: "tutorial",region: "ap-northeast-2", sourceControlType: "jenkins"
