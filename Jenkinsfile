@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Parallel Test') {
       parallel {
-        stage('Build Docker Image - CodeBuild - 1') {
+        stage("Build Docker Image - CodeBuild - 1") {
           steps {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
@@ -31,7 +31,7 @@ pipeline {
           }
         } 
 
-        stage('Build Docker Image - CodeBuild' - 2) {
+        stage("Build Docker Image - CodeBuild - 2") {
           steps {
             script {
               String nonProductionBuildSpec = """
