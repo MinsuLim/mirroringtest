@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage("parallel") {
       parallel {
-        stage("Build Docker Image - CodeBuild1") {
+        stage("Build Docker Image - CodeBuild1") { 
           steps {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
