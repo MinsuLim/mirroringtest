@@ -34,7 +34,7 @@ pipeline {
         stage("Build Docker Image - CodeBuild2") {
           steps {
             script {
-              echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
+              echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"   
               // String nonProductionBuildSpec = """
               //   version: 0.2
               //   env:
