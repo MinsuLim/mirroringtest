@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Parallel Test') {
       parallel {
-        stage(' Build Docker Image - CodeBuild - 1') {
+        stage('Build Docker Image - CodeBuild - 1') {
           steps {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
@@ -27,22 +27,13 @@ pipeline {
               writeFile file: 'buildspec.yml', text: nonProductionBuildSpec
               //Send checked out files to AWS
               awsCodeBuild credentialsType: 'keys', sseAlgorithm: 'AES256', projectName: "tutorial",region: "ap-northeast-2", sourceControlType: "jenkins"
-
-              // awsCodeBuild(
-              //   credentialsType: 'keys',
-              //   projectName: 'tutorial',
-              //   region: 'ap-northeast-2',
-              //   sourceControlType: 'jenkins',
-              //   sseAlgorithm: 'AES256',
-              //   buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
             }
           }
         } 
 
-        stage(' Build Docker Image - CodeBuild' - 2) {
+        stage('Build Docker Image - CodeBuild' - 2) {
           steps {
             script {
-              echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
               String nonProductionBuildSpec = """
                 version: 0.2
                 env:
@@ -62,21 +53,14 @@ pipeline {
               writeFile file: 'buildspec.yml', text: nonProductionBuildSpec
               //Send checked out files to AWS
               awsCodeBuild credentialsType: 'keys', sseAlgorithm: 'AES256', projectName: "tutorial",region: "ap-northeast-2", sourceControlType: "jenkins"
-
-              // awsCodeBuild(
-              //   credentialsType: 'keys',
-              //   projectName: 'tutorial',
-              //   region: 'ap-northeast-2',
-              //   sourceControlType: 'jenkins',
-              //   sseAlgorithm: 'AES256',
-              //   buildSpecFile: "ci/${env.BRANCH_NAME}/buildspec.yml"
             }
           }
         } 
+
       }
     }
     
-    // stage(' Build Docker Image - CodeBuild') {
+    // stage('Build Docker Image - CodeBuild') {
     //   steps {
     //     script {
     //       echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
