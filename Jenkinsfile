@@ -39,16 +39,16 @@ pipeline {
     } 
   }
 
-  stages { 
-    agent { node { label 'ecs-agent-fargate' } }
-    stage ("Fargate") {
-      steps {
-        script {
-          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
-        }
-      }
-    }
-  }
+  // stages { 
+  //   agent { node { label 'ecs-agent-fargate' } }
+  //   stage ("Fargate") {
+  //     steps {
+  //       script {
+  //         echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
+  //       }
+  //     }
+  //   }
+  // }
 
 }
 
