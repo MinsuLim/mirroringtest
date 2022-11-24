@@ -1,8 +1,7 @@
 pipeline {
-  agent any
+  agent { node { label 'ecs-agent' } }
   // 코드빌드 하나만 돌리게
   stages {
-    agent { node { label 'ecs-agent' } }
     stage("Build Docker Image - CodeBuild") {
       steps {
         script {
