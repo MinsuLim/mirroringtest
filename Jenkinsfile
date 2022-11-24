@@ -1,6 +1,6 @@
 pipeline {
+  agent { node { label 'ecs-agent-fargate' } }
   stages {
-    agent { node { label 'ecs-agent-fargate' } }
     stage ("Fargate") {
       steps {
         script {
