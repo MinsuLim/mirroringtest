@@ -16,10 +16,10 @@ pipeline {
           env.CATEGORY="."
           env.CONTEXT_S3="jenkins-kaniko-ap-northeast-2"
 
-          env.ECR_NAME=sh(returnStdout: true, script:"grep repository_uri ./config | awk -F '=' '{print $2}' | sed -e 's/[\"\ ]//g'")
-          env.ECR_REPO=sh(returnStdout: true, script:"aws ecr describe-repositories --repository-names ${env.ECR_NAME} | jq .repositories[].repositoryUri | sed -e 's/^\"//' -e 's/\"$//'")
-          echo "${env.ECR_NAME}"
-          echo "${env.ECR_REPO}"
+          env.ECR_NAME="jenkins-kaniko"
+          env.ECR_REPO="056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins-kaniko"
+          // echo "${env.ECR_NAME}"
+          // echo "${env.ECR_REPO}"
 
           
           sh("""
