@@ -1,0 +1,29 @@
+{
+        "cluster": "_CLUSTER_",
+        "count": 1,
+        "launchType": "FARGATE",
+        "networkConfiguration": {
+                "awsvpcConfiguration": {
+                        "subnets": [
+                                "_SUBNET_"
+                        ],
+                        "securityGroups": [
+                                "_SG_"
+                        ],
+                        "assignPublicIp": "DISABLED"
+                }
+        },
+        "overrides": {
+                "containerOverrides": [
+                {
+                        "name": "kaniko",
+                        "command": [
+                                "sh",
+                                "-c",
+                                "mkdir -p /kaniko/.docker && echo '{\"credsStore\":\"ecr-login\"}' > /kaniko/.docker/config.json && /kaniko/executor --context _CONTEXT_URI_ --destination _ECR_REPO_ --dockerfile Dockerfile --force"
+                        ]
+                } 
+                ]
+        },
+        "platformVersion": "1.4.0"
+    }

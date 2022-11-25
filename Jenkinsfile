@@ -7,6 +7,26 @@ pipeline {
         script {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
           echo "Hello!"
+
+          env.ECR_NAME=sh(returnStdout: true, script:"grep repository_uri ${CATEGORY}/${IMAGE_ENV}/config | awk -F '=' '{print $2}' | sed -e 's/[\"\ ]//g')")
+          env.ECR_REPO=sh(returnStdout: true, script:"aws ecr describe-repositories --repository-names ${ECR_NAME} | jq .repositories[].repositoryUri | sed -e 's/^\"//' -e 's/\"$//'")
+          echo "${env.ECR_NAME}"
+          echo "${env.ECR_REPO}"
+
+          env.KANIKO_CLS="ECS-CLUSTER-JENKINS-COMM"
+          env.KANIKO_TD="builder-kaniko"
+          env.KANIKO_SBN="subnet-07621e84987483b1c"
+          env.KANIKO_SG="	sg-06f6342db9529bdb7"
+
+          env.CATEGORY="."
+          env.CONTEXT_S3="jenkins-kaniko-ap-northeast-2"
+          
+          sh("""
+            chmod -R +x build-scripts/
+            ./build-scripts/build-and-push-with-kaniko.sh $ECR_REPO
+          """)
+          
+          
         }
       }
     }
