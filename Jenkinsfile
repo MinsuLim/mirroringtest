@@ -16,15 +16,15 @@ pipeline {
           env.CATEGORY="."
           env.CONTEXT_S3="jenkins-kaniko-ap-northeast-2"
 
-          env.ECR_NAME=sh(returnStdout: true, script:"grep repository_uri ${CATEGORY}/config | awk -F '=' '{print $2}' | sed -e 's/[\"\ ]//g')")
-          env.ECR_REPO=sh(returnStdout: true, script:"aws ecr describe-repositories --repository-names ${ECR_NAME} | jq .repositories[].repositoryUri | sed -e 's/^\"//' -e 's/\"$//'")
+          env.ECR_NAME=sh(returnStdout: true, script:"grep repository_uri ${env.CATEGORY}/config | awk -F '=' '{print $2}' | sed -e 's/[\"\ ]//g')")
+          env.ECR_REPO=sh(returnStdout: true, script:"aws ecr describe-repositories --repository-names ${env.ECR_NAME} | jq .repositories[].repositoryUri | sed -e 's/^\"//' -e 's/\"$//'")
           echo "${env.ECR_NAME}"
           echo "${env.ECR_REPO}"
 
           
           sh("""
             chmod -R +x build-scripts/
-            ./build-scripts/build-and-push-with-kaniko.sh $ECR_REPO
+            ./build-scripts/build-and-push-with-kaniko.sh ${env.ECR_REPO}
           """)
           
           
