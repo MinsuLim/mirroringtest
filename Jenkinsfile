@@ -1,30 +1,30 @@
-def awsAssumeRoleWithBaseRole(roleArn) {
-  def sanitizedJobName = env.JOB_NAME.replaceAll("[\\W]|_", "")
-  def sanitizedBuildNumber = env.BUILD_NUMBER.replaceAll("[\\W]|_", "")
-  def roleSessionName = "jenkins-$sanitizedBuildNumber-$sanitizedJobName".take(64)
+// def awsAssumeRoleWithBaseRole(roleArn) {
+//   def sanitizedJobName = env.JOB_NAME.replaceAll("[\\W]|_", "")
+//   def sanitizedBuildNumber = env.BUILD_NUMBER.replaceAll("[\\W]|_", "")
+//   def roleSessionName = "jenkins-$sanitizedBuildNumber-$sanitizedJobName".take(64)
 
-  env.AWS_ACCESS_KEY_ID = ""
-  env.AWS_SECRET_ACCESS_KEY = ""
-  env.AWS_SESSION_TOKEN = ""
+//   env.AWS_ACCESS_KEY_ID = ""
+//   env.AWS_SECRET_ACCESS_KEY = ""
+//   env.AWS_SESSION_TOKEN = ""
 
-  def tempRole = sh(returnStdout: true, script: """
-    set +x
-    aws sts assume-role --role-arn ${roleArn} --role-session-name ${roleSessionName}
-  """).trim()
+//   def tempRole = sh(returnStdout: true, script: """
+//     set +x
+//     aws sts assume-role --role-arn ${roleArn} --role-session-name ${roleSessionName}
+//   """).trim()
 
-  env.AWS_ACCESS_KEY_ID = sh(returnStdout: true, script: """
-    set +x
-    echo '${tempRole}' | jq .Credentials.AccessKeyId | xargs
-  """).trim()
-  env.AWS_SECRET_ACCESS_KEY = sh(returnStdout: true, script: """
-    set +x
-    echo '${tempRole}' | jq .Credentials.SecretAccessKey | xargs
-  """).trim()
-  env.AWS_SESSION_TOKEN = sh(returnStdout: true, script: """
-    set +x
-    echo '${tempRole}' | jq .Credentials.SessionToken | xargs
-  """).trim()
-}
+//   env.AWS_ACCESS_KEY_ID = sh(returnStdout: true, script: """
+//     set +x
+//     echo '${tempRole}' | jq .Credentials.AccessKeyId | xargs
+//   """).trim()
+//   env.AWS_SECRET_ACCESS_KEY = sh(returnStdout: true, script: """
+//     set +x
+//     echo '${tempRole}' | jq .Credentials.SecretAccessKey | xargs
+//   """).trim()
+//   env.AWS_SESSION_TOKEN = sh(returnStdout: true, script: """
+//     set +x
+//     echo '${tempRole}' | jq .Credentials.SessionToken | xargs
+//   """).trim()
+// }
 
 pipeline {
 
@@ -36,8 +36,38 @@ pipeline {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
           sh("jq --version")
           sh("aws --version")
-          env.role_arn = 'arn:aws:iam::056231226580:role/IAM-JENKINS'
-          awsAssumeRoleWithBaseRole(env.role_arn)
+          
+          env.role_arn = "arn:aws:iam::056231226580:role/IAM-JENKINS"
+
+          def sanitizedJobName = env.JOB_NAME.replaceAll("[\\W]|_", "")
+          def sanitizedBuildNumber = env.BUILD_NUMBER.replaceAll("[\\W]|_", "")
+          def roleSessionName = "jenkins-$sanitizedBuildNumber-$sanitizedJobName".take(64)
+
+          env.AWS_ACCESS_KEY_ID = ""
+          env.AWS_SECRET_ACCESS_KEY = ""
+          env.AWS_SESSION_TOKEN = ""
+
+          def tempRole = sh(returnStdout: true, script: """
+            set +x
+            aws sts assume-role --role-arn ${env.role_arn} --role-session-name ${roleSessionName}
+          """).trim()
+          echo "${tempRole}"
+
+          aws sts assume-role --role-arn "arn:aws:iam::056231226580:role/IAM-JENKINS" --role-session-name "200"
+
+          env.AWS_ACCESS_KEY_ID = sh(returnStdout: true, script: """
+            set +x
+            echo '${tempRole}' | jq .Credentials.AccessKeyId | xargs
+          """).trim()
+          env.AWS_SECRET_ACCESS_KEY = sh(returnStdout: true, script: """
+            set +x
+            echo '${tempRole}' | jq .Credentials.SecretAccessKey | xargs
+          """).trim()
+          env.AWS_SESSION_TOKEN = sh(returnStdout: true, script: """
+            set +x
+            echo '${tempRole}' | jq .Credentials.SessionToken | xargs
+          """).trim()
+          // awsAssumeRoleWithBaseRole(env.role_arn)
           sh ('aws sts get-caller-identity')
 
           env.KANIKO_CLS="ECS-CLUSTER-JENKINS-COMM"
@@ -167,10 +197,6 @@ pipeline {
 //       }
 //     }
 //   }
-
-
-
-
 
 
   // 코드빌드 하나만 돌리게
