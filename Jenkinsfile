@@ -8,6 +8,7 @@ pipeline {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
           echo "Hello!"
           sh("jq --version")
+          sh("aws --version")
 
           env.KANIKO_CLS="ECS-CLUSTER-JENKINS-COMM"
           env.KANIKO_TD="builder-kaniko"
