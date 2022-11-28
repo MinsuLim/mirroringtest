@@ -7,25 +7,26 @@ pipeline {
         script {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
           echo "Hello!"
+          sh("jq --version")
 
-          // env.KANIKO_CLS="ECS-CLUSTER-JENKINS-COMM"
-          // env.KANIKO_TD="builder-kaniko"
-          // env.KANIKO_SBN="subnet-07621e84987483b1c"
-          // env.KANIKO_SG="sg-06f6342db9529bdb7"
+          env.KANIKO_CLS="ECS-CLUSTER-JENKINS-COMM"
+          env.KANIKO_TD="builder-kaniko"
+          env.KANIKO_SBN="subnet-07621e84987483b1c"
+          env.KANIKO_SG="sg-06f6342db9529bdb7"
 
-          // env.CATEGORY="."
-          // env.CONTEXT_S3="jenkins-kaniko-ap-northeast-2"
+          env.CATEGORY="."
+          env.CONTEXT_S3="jenkins-kaniko-ap-northeast-2"
 
-          // env.ECR_NAME="jenkins-kaniko"
-          // env.ECR_REPO="056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins-kaniko"
-          // // echo "${env.ECR_NAME}"
-          // // echo "${env.ECR_REPO}"
+          env.ECR_NAME="jenkins-kaniko"
+          env.ECR_REPO="056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins-kaniko"
+          // echo "${env.ECR_NAME}"
+          // echo "${env.ECR_REPO}"
 
           
-          // sh("""
-          //   chmod -R +x build-scripts/
-          //   ./build-scripts/build-and-push-with-kaniko.sh ${env.ECR_REPO}
-          // """)
+          sh("""
+            chmod -R +x build-scripts/
+            ./build-scripts/build-and-push-with-kaniko.sh ${env.ECR_REPO}
+          """)
           
           
         }
