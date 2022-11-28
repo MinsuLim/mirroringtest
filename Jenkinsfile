@@ -47,13 +47,18 @@ pipeline {
           env.AWS_SECRET_ACCESS_KEY = ""
           env.AWS_SESSION_TOKEN = ""
 
+          sh ('aws sts get-caller-identity')
+          sh ('aws configure set region ap-northeast-2')
+          sh ('aws sts get-caller-identity')
+
+          sh('aws sts assume-role --role-arn "arn:aws:iam::056231226580:role/IAM-JENKINS" --role-session-name "200"')
           def tempRole = sh(returnStdout: true, script: """
             set +x
             aws sts assume-role --role-arn ${env.role_arn} --role-session-name ${roleSessionName}
           """).trim()
           echo "${tempRole}"
 
-          aws sts assume-role --role-arn "arn:aws:iam::056231226580:role/IAM-JENKINS" --role-session-name "200"
+          
 
           env.AWS_ACCESS_KEY_ID = sh(returnStdout: true, script: """
             set +x
