@@ -36,8 +36,8 @@ pipeline {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
           sh("jq --version")
           sh("aws --version")
-          env.role_arn           = 'arn:aws:iam::056231226580:role/genie-jenkins-admin-role'
-          awsAssumeRoleWithBaseRole(role_arn)
+          env.role_arn = 'arn:aws:iam::056231226580:role/IAM-JENKINS'
+          awsAssumeRoleWithBaseRole(env.role_arn)
           sh ('aws sts get-caller-identity')
 
           env.KANIKO_CLS="ECS-CLUSTER-JENKINS-COMM"
