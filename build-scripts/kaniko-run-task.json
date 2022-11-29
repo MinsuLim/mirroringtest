@@ -13,7 +13,6 @@
                         "assignPublicIp": "DISABLED"
                 }
         },
-        "entryPoint": "/busybox/sh",
         "overrides": {
                 "containerOverrides": [
                 {
