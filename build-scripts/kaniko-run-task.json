@@ -18,7 +18,9 @@
                 {
                         "name": "kaniko",
                         "command": [
-                                "pwd"
+                                "sh",
+                                "-c",
+                                "mkdir -p /kaniko/.docker && echo '{\"credsStore\":\"ecr-login\"}' > /kaniko/.docker/config.json && /kaniko/executor --context _CONTEXT_URI_ --destination _ECR_REPO_ --dockerfile Dockerfile --force"
                         ]
                 } 
                 ]
