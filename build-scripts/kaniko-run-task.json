@@ -13,11 +13,11 @@
                         "assignPublicIp": "DISABLED"
                 }
         },
+        "entryPoint": "/busybox/sh",
         "overrides": {
                 "containerOverrides": [
                 {
                         "name": "kaniko",
-                        "entryPoint": "/busybox/sh",
                         "command": [
                                 "sh",
                                 "-c",
