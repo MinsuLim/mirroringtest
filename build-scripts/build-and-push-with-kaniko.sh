@@ -26,6 +26,8 @@ sed -i -e "s|_CLUSTER_|${KANIKO_CLS}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_ECR_REPO_|${ECR_REPO}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_CONTEXT_URI_|${CONTEXT_URI}|g" ./build-scripts/kaniko-run-task.json
 
+cat ./build-scripts/kaniko-run-task.json
+
 # Upload context file
 tar --exclude="./build-scripts" -zcvf ./build-scripts/$CONTEXT_FILE -C $DOCKERFILE_LOC . 
 aws s3 cp ./build-scripts/$CONTEXT_FILE $CONTEXT_URI
