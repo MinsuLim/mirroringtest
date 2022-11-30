@@ -46,7 +46,8 @@ pipeline {
           env.KANIKO_SBN="subnet-07621e84987483b1c"
           env.KANIKO_SG="sg-06f6342db9529bdb7"
 
-          env.CATEGORY="."
+          env.CATEGORY="executor"
+          env.IMAGE_ENV="appimg"
           env.CONTEXT_S3="jenkins-kaniko-ap-northeast-2"
 
           env.ECR_NAME="jenkins-kaniko"
