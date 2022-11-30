@@ -1,9 +1,9 @@
 FROM node:12
 
-ARG WORKDIR=/JenkinsCodebuildTutorial
+# ARG WORKDIR=/JenkinsCodebuildTutorial
 
-COPY . ${WORKDIR}
-WORKDIR ${WORKDIR}
+# COPY . ${WORKDIR}
+# WORKDIR ${WORKDIR}
 
 RUN yarn
 RUN yarn tsc
