@@ -30,7 +30,7 @@ ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && echo "Downlaoding maven" \
-  && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+  && curl -fsSL -o /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-3.6.1-bin.tar.gz \
   \
   && echo "Checking download hash" \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
