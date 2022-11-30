@@ -4,7 +4,8 @@ USER root
 
 # install git curl wget tar
 RUN apt-get update && apt install -y --no-install-recommends apt-utils dialog \
-    make git curl wget tar gradle
+    make git curl wget tar gradle \
+    && java -version
 
 # install awscli v2 + remove unnecessary files
 RUN curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
@@ -17,7 +18,8 @@ RUN curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv
         /usr/local/aws-cli/v2/current/dist/awscli/data/ac.index \
         /usr/local/aws-cli/v2/current/dist/awscli/examples \
     && find /usr/local/aws-cli/v2/current/dist/awscli/botocore/data -name examples-1.json -delete \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && aws --version
 
 # install gettext & jq
 RUN apt-get install -y gettext-base jq
@@ -49,12 +51,13 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
     && chmod 700 get_helm.sh \
     && ./get_helm.sh \
-    && rm -rf ./get_helm.sh
+    && rm -rf ./get_helm.sh \
+    heml version
 
 # install argcd cli
 ARG ARGO_VERSION=v2.3.4
 RUN curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/${ARGO_VERSION}/argocd-linux-amd64 && \ 
-    chmod +x /usr/local/bin/argocd
+    chmod +x /usr/local/bin/argocd 
 
 
 
