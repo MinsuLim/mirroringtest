@@ -25,7 +25,7 @@ def awsAssumeRoleWithBaseRole(roleArn) {
     echo '${tempRole}' | jq .Credentials.SessionToken | xargs
   """).trim()
 } 
- 
+  
 pipeline {
  
   agent { node { label 'agent-fargate' } } 
