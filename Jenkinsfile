@@ -41,7 +41,7 @@ pipeline {
             helm version 
             yq --version
             git --version 
-          """)
+          """)   
           
           env.role_arn = "arn:aws:iam::056231226580:role/IAM-JENKINS"
           awsAssumeRoleWithBaseRole(env.role_arn)
