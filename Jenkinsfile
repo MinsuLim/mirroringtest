@@ -24,7 +24,7 @@ def awsAssumeRoleWithBaseRole(roleArn) {
     set +x
     echo '${tempRole}' | jq .Credentials.SessionToken | xargs
   """).trim()
-}
+} 
 
 pipeline {
  
