@@ -39,7 +39,7 @@ pipeline {
             aws --version
             jq --version
             yq --version
-            git --version 
+            git --version   
           """)   
           
           env.role_arn = "arn:aws:iam::056231226580:role/IAM-JENKINS"
