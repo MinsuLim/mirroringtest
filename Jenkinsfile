@@ -27,7 +27,7 @@ def awsAssumeRoleWithBaseRole(roleArn) {
 }
 
 pipeline {
-
+ 
   agent { node { label 'agent-fargate' } } 
   stages { 
     stage ("Fargate") { 
