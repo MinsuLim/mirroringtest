@@ -1,4 +1,4 @@
-def awsAssumeRoleWithBaseRole(roleArn) {
+def awsAssumeRoleWithBaseRole(roleArn) { 
   def sanitizedJobName = env.JOB_NAME.replaceAll("[\\W]|_", "")
   def sanitizedBuildNumber = env.BUILD_NUMBER.replaceAll("[\\W]|_", "")
   def roleSessionName = "jenkins-$sanitizedBuildNumber-$sanitizedJobName".take(64)
