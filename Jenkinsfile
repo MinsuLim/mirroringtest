@@ -38,7 +38,6 @@ pipeline {
             java -version
             aws --version
             jq --version
-            helm version 
             yq --version
             git --version 
           """)   
