@@ -30,7 +30,7 @@ pipeline {
 
   agent { node { label 'agent-fargate' } } 
   stages { 
-    stage ("Fargate") {
+    stage ("Fargate") { 
       steps {
         script {
           echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"
