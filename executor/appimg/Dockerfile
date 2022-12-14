@@ -2,6 +2,7 @@ FROM 056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/cicd/jenkins-inbound-agen
 
 USER root
 
+
 # install git curl wget tar
 RUN apt-get update && apt install -y --no-install-recommends apt-utils dialog \
     make git curl wget tar gradle \

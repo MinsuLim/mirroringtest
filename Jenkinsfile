@@ -33,9 +33,15 @@ pipeline {
     stage ("Fargate") {
       steps {
         script {
-          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"  
-          sh("jq --version")
-          sh("aws --version")
+          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}"
+          sh("""
+            java -version
+            aws --version
+            jq --version
+            helm version 
+            yq --version
+            git --version
+          """)
           
           env.role_arn = "arn:aws:iam::056231226580:role/IAM-JENKINS"
           awsAssumeRoleWithBaseRole(env.role_arn)
