@@ -26,7 +26,7 @@ CONTEXT_URI=s3://$CONTEXT_S3/$DOCKERFILE_LOC/$CONTEXT_FILE
 sed -i -e "s|_SUBNET_|${KANIKO_SBN}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_SG_|${KANIKO_SG}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_CLUSTER_|${KANIKO_CLS}|g" ./build-scripts/kaniko-run-task.json
-sed -i -e "s|_ECR_REPO_|${ECR_REPO}:v2|g" ./build-scripts/kaniko-run-task.json
+sed -i -e "s|_ECR_REPO_|${ECR_REPO}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_CONTEXT_URI_|${CONTEXT_URI}|g" ./build-scripts/kaniko-run-task.json
 
 cat ./build-scripts/kaniko-run-task.json
