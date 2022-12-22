@@ -13,17 +13,20 @@ set -e
 ECR_REPO=$1
 
 # Set Kaniko build context location
-#DOCKERFILE_LOC=${CATEGORY}/${IMAGE_ENV}
 DOCKERFILE_LOC=${CATEGORY}/${IMAGE_ENV}
+# DOCKERFILE_LOC=executor/appimg
 RUNNER_NAME=$(echo "$ECR_REPO" | awk -F '/' '{print $2}')
+# ECR_REPO=056231226580.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins-kaniko
+# RUNNER_NAME=jenkins-kaniko
 CONTEXT_FILE=context.tar.gz
 CONTEXT_URI=s3://$CONTEXT_S3/$DOCKERFILE_LOC/$CONTEXT_FILE
+# CONTEXT_URI=s3://jenkins-kaniko-ap-northeast-2/executor/appimg/context.tar.gz
 
 # Make ECS CLI input file
 sed -i -e "s|_SUBNET_|${KANIKO_SBN}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_SG_|${KANIKO_SG}|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_CLUSTER_|${KANIKO_CLS}|g" ./build-scripts/kaniko-run-task.json
-sed -i -e "s|_ECR_REPO_|${ECR_REPO}|g" ./build-scripts/kaniko-run-task.json
+sed -i -e "s|_ECR_REPO_|${ECR_REPO}:v2|g" ./build-scripts/kaniko-run-task.json
 sed -i -e "s|_CONTEXT_URI_|${CONTEXT_URI}|g" ./build-scripts/kaniko-run-task.json
 
 cat ./build-scripts/kaniko-run-task.json
