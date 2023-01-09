@@ -1,3 +1,7 @@
 test12
 222
+<<<<<<< HEAD
 master a
+=======
+aaaaa
+>>>>>>> 7f26c834c620230b4b29629d4537f27e73a70efe
