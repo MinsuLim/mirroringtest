@@ -12,7 +12,7 @@ pipeline {
         }
         stage ("agent") {
             steps {
-             git branch: 'master',  url: 'https://github.com/MinsuLim/helmchart.git'
+             git branch: 'main',  url: 'https://github.com/MinsuLim/helmchart.git'
              bat 'dir'
 //              sshagent(credentials: ['ssh-credentials-id']) {
 //                 bat 'mkdir test2'
