@@ -1,7 +1,23 @@
-node('', {
-  stage('example1', {
-    echo "ls -al"
-    sh "ls -al"
-  })
-
-})
+pipeline {
+ 
+  stages { 
+    stage ("Fargate") { 
+      steps {
+        script {
+          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
+          sh("""
+            ls -al 
+          """)               
+        }
+      }
+    }
+    stage ("agent") {
+         sshagent() {
+            sh """
+                ls -al
+            """
+          } 
+    }
+  }
+  
+}
