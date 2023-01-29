@@ -5,7 +5,7 @@ pipeline {
           steps {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
-              bat 'mkdir test1'
+              
               bat 'dir'           
             }
           }
@@ -13,11 +13,11 @@ pipeline {
         stage ("agent") {
             steps {
              git branch: 'master',  url: 'https://github.com/MinsuLim/helmchart.git'
-                
-             sshagent(credentials: ['ssh-credentials-id']) {
-                bat 'mkdir test2'
-                bat 'dir'           
-              } 
+             bat 'dir'
+//              sshagent(credentials: ['ssh-credentials-id']) {
+//                 bat 'mkdir test2'
+//                 bat 'dir'           
+//               } 
             }
         }
     }
