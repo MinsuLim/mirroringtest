@@ -5,8 +5,7 @@ pipeline {
           steps {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
-              bat 'mkdir temp2'
-              bat 'cd temp2'
+              echo "${GIT_COMMIT}"
               bat 'dir'           
             }
           }
@@ -24,7 +23,7 @@ pipeline {
         }
         stage ("restore") {
             steps {
-              checkout scm   
+              checkout scm ${GIT_COMMIT}
               bat 'dir'
             }
         }
