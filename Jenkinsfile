@@ -23,7 +23,7 @@ pipeline {
         }
         stage ("restore") {
             steps {
-              checkout scm ${GIT_COMMIT}
+              checkout scm 
               bat 'dir'
             }
         }
