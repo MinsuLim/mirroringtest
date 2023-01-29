@@ -5,24 +5,16 @@ pipeline {
           steps {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
-              sh("""
-                id
-                pwd
-                touch 1
-                ls -al 
-              """)               
+              bat 'mkdir test1'
+              bat 'dir'           
             }
           }
         }
         stage ("agent") {
             steps {
              sshagent(credentials: ['ssh-credentials-id']) {
-                sh """
-                    id
-                    pwd
-                    touch 2
-                    ls -al
-                """
+                bat 'mkdir test2'
+                bat 'dir'           
               } 
             }
         }
