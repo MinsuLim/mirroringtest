@@ -15,6 +15,7 @@ pipeline {
           }
         }
         stage ("agent") {
+            steps {
              sshagent() {
                 sh """
                     id
@@ -23,6 +24,7 @@ pipeline {
                     ls -al
                 """
               } 
+            }
         }
     }
 }
