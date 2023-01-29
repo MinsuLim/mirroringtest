@@ -1,21 +1,27 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
+    stage ("Fargate") { 
+      steps {
+        script {
+          echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
+          sh("""
+            id
+            pwd
+            touch 1
+            ls -al 
+          """)               
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+      }
+    }
+    stage ("agent") {
+         sshagent() {
+            sh """
+                id
+                pwd
+                touch 2
+                ls -al
+            """
+          } 
     }
 }
