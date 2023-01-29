@@ -22,5 +22,11 @@ pipeline {
 //               } 
             }
         }
+        stage ("restore") {
+            steps {
+              checkout scm   
+              bat 'dir'
+            }
+        }
     }
 }
