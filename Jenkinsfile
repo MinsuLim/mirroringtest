@@ -16,7 +16,7 @@ pipeline {
         }
         stage ("agent") {
             steps {
-             sshagent() {
+             sshagent(credentials: ['ssh-credentials-id']) {
                 sh """
                     id
                     pwd
