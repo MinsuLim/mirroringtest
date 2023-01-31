@@ -9,7 +9,7 @@ pipeline {
               
               bat 'dir'           
               bat 'git clone https://github.com/MinsuLim/helmchart.git'
-              bat 'dir'
+              bat 'dir helmchart'
             }
           }
         }
