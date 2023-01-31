@@ -8,7 +8,7 @@ pipeline {
               echo "${GIT_COMMIT}"
               
               bat 'dir'           
-              bat 'git clone https://github.com/MinsuLim/helmchart.git'
+              //bat 'git clone https://github.com/MinsuLim/helmchart.git'
               bat 'dir helmchart'
             }
           }
