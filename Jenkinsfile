@@ -26,7 +26,14 @@ pipeline {
         }
         stage ("restore") {
             steps {
-              checkout scm 
+              //checkout scm 
+            checkout([$class: 'GitSCM',
+                      branches: [[name: "${GIT_COMMIT}"]],
+                      doGenerateSubmoduleConfigurations: false,
+                      extensions: [],
+                      gitTool: 'Default',
+                      submoduleCfg: []
+                    ])
               bat 'dir'
             }
         }
