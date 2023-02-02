@@ -6,6 +6,8 @@ pipeline {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
               echo "${GIT_COMMIT}"
+              echo "${env.GIT_COMMIT}"
+              echo "${'GIT_COMMIT'}"
               
               bat 'dir'           
               //bat 'git clone https://github.com/MinsuLim/helmchart.git'
