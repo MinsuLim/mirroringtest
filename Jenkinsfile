@@ -30,7 +30,7 @@ pipeline {
             steps {
               //checkout scm 
             checkout([$class: 'GitSCM',
-                      branches: [[name: "${GIT_COMMIT}"]],
+                      branches: [[name: "env.GIT_COMMIT"]],
                       doGenerateSubmoduleConfigurations: false,
                       gitTool: 'Default'
                     ])
