@@ -6,9 +6,7 @@ pipeline {
             script {
               echo "${env.JOB_NAME} / ${env.BUILD_NUMBER}" 
               echo "${GIT_COMMIT}"
-              echo "${env.GIT_COMMIT}"
-              echo "${'GIT_COMMIT'}"
-              echo "env.GIT_COMMIT"
+              echo "${env}"
 
               bat 'dir'           
               //bat 'git clone https://github.com/MinsuLim/helmchart.git'
@@ -31,7 +29,7 @@ pipeline {
             steps {
               //checkout scm 
             checkout([$class: 'GitSCM',
-                      branches: [[name: "env.GIT_COMMIT"]],
+                      branches: [[name: "${env.GIT_COMMIT}"]],
                       doGenerateSubmoduleConfigurations: false,
                       gitTool: 'Default'
                     ])
